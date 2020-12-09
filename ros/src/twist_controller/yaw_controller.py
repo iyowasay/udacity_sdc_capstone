@@ -18,6 +18,16 @@ class YawController(object):
     def get_steering(self, linear_velocity, angular_velocity, current_velocity):
         angular_velocity = current_velocity * angular_velocity / linear_velocity if abs(linear_velocity) > 0. else 0.
 
+        # the car in the simulator might be a bit wondering
+        # one way to fix this is to add damping terms to the steering value
+        # how to get the current angular velocity
+        # dif = abs(current_angular - angular_vel) 
+        # if dif < 0.01:
+        #     # don't change the steering angle
+        #     return 
+        # elif dif > 1:
+        #     # steer the vehicle
+
         if abs(current_velocity) > 0.1:
             max_yaw_rate = abs(self.max_lat_accel / current_velocity);
             angular_velocity = max(-max_yaw_rate, min(max_yaw_rate, angular_velocity))
